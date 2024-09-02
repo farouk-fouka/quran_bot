@@ -70,7 +70,7 @@ def d1(message,call):
                 all = a1,a2,a3,a4,a5,a6,a7,a8,a9,a10
                 do = str(''.join((random.choice(all) for i in range(1))))
                 bot.send_message(us, text=f"""<strong> ( {aih} ) {do}</strong>""",parse_mode="html",reply_markup=key,timeout=3.5)
-                sleep(5)
+                sleep(30)
 
 
 
