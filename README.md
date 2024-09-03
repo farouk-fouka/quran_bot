@@ -53,10 +53,12 @@ You can customize the interval for content delivery by adjusting the `sleep()` f
 For the bot to send messages to a channel, ensure that the bot is added as an admin to the channel.
 ## Note 2 
 maybe I'll translate the guide part to Arabic if someone need it or if this gets some attention who knows.you can ask if you need anything 
+أي شخص يريد مساعدة في شيء يمكن طرحها في "المشاكل"
+في المستقبل ربما سوف أترجم خطوات الإستعمال إذا كان هناك أحد مهتم بالبوت
 ## License
 
 This project is licensed under the MIT License.
-
+Big thanks to @oorog on telegram and the Api providers 
 
 ## Contribution
 
