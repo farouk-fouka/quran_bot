@@ -1,4 +1,6 @@
+
 import os
+from dotenv import load_dotenv
 try:
     import requests, telebot
     from telebot import *
@@ -7,9 +9,10 @@ try:
 except ModuleNotFoundError:
     os.system('pip install requests')
     os.system('pip install telebot')
-    os.system('pip install pyTelegramBotAPI==3.7.6')
-
-bot = telebot.TeleBot("7510163033:AAFMgB779_uSpohN69ThqPun3W8bPvcfHbg")
+    os.system('pip install pyTelegramBotAPI')
+load_dotenv()
+bot_key=os.getenv("Bot_key")
+bot = telebot.TeleBot(bot_key)
 
 # Global variables to track the selected mode and message destination
 selected_mode = None
