@@ -1,4 +1,4 @@
-# Quran Bot README
+# Quran Bot بوت القرآن
 
 ## Overview
 
@@ -56,7 +56,7 @@ maybe I'll translate the guide part to Arabic if someone need it or if this gets
 ## License
 
 This project is licensed under the MIT License.
-Big thanks to @oorog on telegram and the Api providers 
+
 
 ## Contribution
 
