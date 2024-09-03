@@ -14,7 +14,7 @@ load_dotenv()
 bot_key=os.getenv("Bot_key")
 bot = telebot.TeleBot(bot_key)
 
-# Global variables to track the selected mode and message destination
+# Global variables to track the mod
 selected_mode = None
 send_to_current_chat = False
 
@@ -24,7 +24,7 @@ def start(message):
     name = message.from_user.first_name
     key = types.InlineKeyboardMarkup()
     
-    # Option to choose between modes
+    
     mode_1 = types.InlineKeyboardButton('Mode 1: Send Random Ayah', callback_data='mode_1')
     mode_2 = types.InlineKeyboardButton('Mode 2: Send Random Quran Page', callback_data='mode_2')
     
@@ -47,7 +47,7 @@ def mode_selection(call):
 def ask_destination(message):
     key = types.InlineKeyboardMarkup()
     
-    # Option to choose where the bot will send the messages
+    # what channel the bot sends_في أي قناة يرسل لك البوت
     option_current_chat = types.InlineKeyboardButton('Send to this chat', callback_data='current_chat')
     option_another_channel = types.InlineKeyboardButton('Send to another channel', callback_data='another_channel')
     
