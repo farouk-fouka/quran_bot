@@ -18,6 +18,10 @@ bot = telebot.TeleBot(bot_key)
 selected_mode = None
 send_to_current_chat = False
 
+
+
+emoji_list = ['🤎', '🤍', '🩶', '🖤', '❤️', '🧡', '💛', '💚', '🩵', '💙', '🥀' , '💜' , '🤎' , '🌹' , '✨']
+random_emoji = random.choice(emoji_list)
 @bot.message_handler(commands=['start'])
 def start(message):
     id = message.from_user.id
@@ -27,21 +31,24 @@ def start(message):
     
     mode_1 = types.InlineKeyboardButton('Mode 1: Send Random Ayah', callback_data='mode_1')
     mode_2 = types.InlineKeyboardButton('Mode 2: Send Random Quran Page', callback_data='mode_2')
+    mode_3 = types.InlineKeyboardButton(" 🖤الوضع 3: حديث عشوائي من صحيح البخاري",callback_data="mode_3")
     
     key.add(mode_1)
     key.add(mode_2)
+    key.add(mode_3)
     
     bot.send_message(message.chat.id, f"Hello {name}, welcome to the Quran bot! Please choose a mode:", 
                      reply_markup=key)
 
-@bot.callback_query_handler(func=lambda call: call.data in ['mode_1', 'mode_2'])
+@bot.callback_query_handler(func=lambda call: call.data in ['mode_1', 'mode_2',"mode_3"])
 def mode_selection(call):
     global selected_mode
     if call.data == "mode_1":
         selected_mode = "ayah"
     elif call.data == "mode_2":
         selected_mode = "page"
-    
+    elif call.data == "mode_3":
+        selected_mode = "hadith"
     ask_destination(call.message)
 
 def ask_destination(message):
@@ -80,6 +87,8 @@ def start_sending(chat_id):
             send_random_ayah(chat_id)
         elif selected_mode == "page":
             send_random_quran_page(chat_id)
+        elif selected_mode == "hadith":
+            send_random_hadith(chat_id)
         sleep(10)  # 24 hours
 
 def send_random_ayah(chat_id):
@@ -96,9 +105,7 @@ def send_random_ayah(chat_id):
         bot14 = types.InlineKeyboardButton(f'{surah_name} : {surah}', callback_data='ayah_info')
         key.add(bot14)
         
-        # Random emoji
-        emoji_list = ['🤎', '🤍', '🩶', '🖤', '❤️', '🧡', '💛', '💚', '🩵', '💙']
-        random_emoji = random.choice(emoji_list)
+        # Random emoji 
         
         bot.send_message(chat_id, text=f"<strong> ( {aih} ) {random_emoji}</strong>", parse_mode="html",
                          reply_markup=key)
@@ -108,5 +115,38 @@ def send_random_quran_page(chat_id):
     page_url = f"https://alquran.vip/APIs/quran-pages/{random_page_number}.png"
     
     bot.send_photo(chat_id, photo=page_url, caption=f"Quran Page {random_page_number}")
+
+
+
+def send_random_hadith(chat_id):
+    random_hadith_number = random.randint(1, 7008)
+    hadith_url = f"https://api.hadith.gading.dev/books/bukhari/{random_hadith_number}"
+
+    try:
+        response = requests.get(hadith_url)
+        
+        if response.status_code == 200:
+            req = response.json()['data']['contents']
+            hadith_number = req['number']
+            arabic_text = req['arab']
+            
+            key = types.InlineKeyboardMarkup()
+            bot_button = types.InlineKeyboardButton(f"صحيح البخاري رقم : {hadith_number}", callback_data='hadith_info')
+            key.add(bot_button)
+            
+            
+            bot.send_message(chat_id, text=f"<strong>{random_emoji} {arabic_text}</strong>", 
+                             parse_mode="html", reply_markup=key)
+            
+        elif response.status_code == 400:
+            print("Error in Hadith API: Bad request")
+        else:
+            print(f"Error: Received unexpected status code {response.status_code}")
+    
+    except requests.exceptions.RequestException as e:
+        print(f"Error during API request: {e}")
+
+# Example usage
+
 
 bot.infinity_polling()
