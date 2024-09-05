@@ -21,7 +21,7 @@ send_to_current_chat = False
 
 
 emoji_list = ['🤎', '🤍', '🩶', '🖤', '❤️', '🧡', '💛', '💚', '🩵', '💙', '🥀' , '💜' , '🤎' , '🌹' , '✨']
-random_emoji = random.choice(emoji_list)
+
 @bot.message_handler(commands=['start'])
 def start(message):
     id = message.from_user.id
@@ -31,13 +31,13 @@ def start(message):
     
     mode_1 = types.InlineKeyboardButton('الوضع 1 : آية عشوائية 💜', callback_data='mode_1')
     mode_2 = types.InlineKeyboardButton('الوضع 2 : صفحة من القرآن🤍', callback_data='mode_2')
-    mode_3 = types.InlineKeyboardButton(" ا🖤لوضع 3: حديث عشوائي من صحيح البخاري",callback_data="mode_3")
+    mode_3 = types.InlineKeyboardButton("الوضع 3 : حديث عشوائي من صحيح البخاري🖤",callback_data="mode_3")
     
     key.add(mode_1)
     key.add(mode_2)
     key.add(mode_3)
     
-    bot.send_message(message.chat.id, f"مرحباً {name}, أهلا بك في بوت القرآن ،إختر وضع:", 
+    bot.send_message(message.chat.id, f"مرحباً {name}, أهلا بك في بوت القرآن الكريم ،إختر الوضع:", 
                      reply_markup=key)
 
 @bot.callback_query_handler(func=lambda call: call.data in ['mode_1', 'mode_2',"mode_3"])
@@ -85,13 +85,17 @@ def start_sending(chat_id):
     while True:
         if selected_mode == "ayah":
             send_random_ayah(chat_id)
+            sleep(1800)#half hour
         elif selected_mode == "page":
             send_random_quran_page(chat_id)
+            sleep(43200)#12hours
         elif selected_mode == "hadith":
             send_random_hadith(chat_id)
-        sleep(10)  # 24 hours
+            sleep(14400) #4hours
+        #sleep(10)  
 
 def send_random_ayah(chat_id):
+    random_emoji = random.choice(emoji_list)
     random_ayah_number = random.randint(1, 6236)
     api_url = f"https://api.alquran.cloud/v1/ayah/{random_ayah_number}/image"
     response = requests.get(api_url)
@@ -119,6 +123,7 @@ def send_random_quran_page(chat_id):
 
 
 def send_random_hadith(chat_id):
+    random_emoji = random.choice(emoji_list)
     random_hadith_number = random.randint(1, 7008)
     hadith_url = f"https://api.hadith.gading.dev/books/bukhari/{random_hadith_number}"
 

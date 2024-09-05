@@ -9,6 +9,7 @@ This bot is designed to send random Quranic content to a user or a specified Tel
 - **Two Content Modes**: 
   - **Mode 1**: Sends a random Ayah from the Quran.
   - **Mode 2**: Sends a random page from the Quran.
+  - **Mode 3**:sends a random hadith from sahih elbukhari
   
 - **Destination Options**: Users can choose to receive the content in the current chat or have the bot send the content to a different Telegram channel.
 
@@ -28,6 +29,7 @@ This bot is designed to send random Quranic content to a user or a specified Tel
 1. **Start Command**: When the user sends the `/start` command, the bot greets the user and presents an inline keyboard with two options:
    - **Mode 1**: Sends a random Ayah.
    - **Mode 2**: Sends a random Quran page.
+   - **Mode 3**:sends a random hadith from sahih elbukhari
 
 2. **Mode Selection**: Based on the user's selection, the bot will remember the chosen mode.
 
@@ -38,6 +40,9 @@ This bot is designed to send random Quranic content to a user or a specified Tel
 5. **Random Ayah**: When sending a random Ayah, the bot uses the Al-Quran API to fetch a random Ayah's text, Surah name, and Surah number. It then sends the Ayah to the chat or channel along with a randomly selected emoji for variety.
 
 6. **Random Quran Page**: The bot randomly selects a Quran page number and sends an image of that page to the chat or channel.
+
+7. **Random Hadith** the bot send a random hadith from sahih elbukhari
+
 
 ## API Usage
 
